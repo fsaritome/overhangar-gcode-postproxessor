@@ -19,6 +19,8 @@ instead of across it. This post-processor:
   5. restores position, Z and retraction state at the end of the block, so the
      rest of the file is untouched.
 
+Experimental and AI-assisted. No warranty, use at your own risk (see NOTICE).
+
 Usage:
   bridgefix.py in.gcode.3mf -o out.gcode.3mf [--preview DIR]
   bridgefix.py in.gcode -o out.gcode
@@ -726,7 +728,9 @@ def process_file(src: str, dst: str, s: Settings, preview_path: str | None = Non
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
-                                 epilog=CREDIT + " | License: AGPL-3.0 (see LICENSE, NOTICE)")
+                                 epilog=CREDIT + " | License: AGPL-3.0 (see LICENSE, NOTICE).\n"
+                                        "Experimental, AI-assisted software, provided without warranty: check the output "
+                                        "in your slicer preview and use it at your own risk.")
     ap.add_argument("input", help=".gcode or .gcode.3mf")
     ap.add_argument("-o", "--output", help="output path (default: overwrite input = post-processing-script mode)")
     ap.add_argument("--preview", help="write a before/after PNG to this path")

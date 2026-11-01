@@ -29,3 +29,14 @@ The attribution must be kept in:
 
 Example files in examples/ are licensed separately; see the LICENSE file in
 each example folder.
+
+DISCLAIMER
+
+This project was produced with substantial help from an AI assistant
+(Claude). It is experimental software that generates machine instructions
+(G-code) for 3D printers. Use it, and the example files, entirely at your own
+risk. It is provided "AS IS", WITHOUT WARRANTY OF ANY KIND, and the author
+accepts NO LIABILITY for any damage (to printers, parts, property or
+otherwise) or loss resulting from its use, as set out in sections 15 and 16
+of the GNU AGPL-3.0. Always check generated G-code in a slicer preview
+before printing, and supervise the print.

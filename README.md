@@ -4,6 +4,12 @@ G-code post-processing and pre-slicing planning for FDM printing (Bambu Studio /
 
 The longer-term plan is a planning layer in front of the slicer (mesh analysis, critical-face intent, per-region strategy: membranes, conical layers, arc overhangs). The first tool is `bridgefix`.
 
+> **Heads-up:** this is an experimental hobby project, and much of the code was
+> written with an AI assistant (Claude). It writes G-code that your printer
+> will execute, so check the slicer preview before printing and stay near the
+> printer on the first run. You use it at your own risk. See
+> [Disclaimer](#disclaimer).
+
 ## bridgefix: shortest-span bridge post-processor (Bambu Studio / OrcaSlicer)
 
 Bambu Studio uses one bridge direction per bridge island, or one fixed
@@ -118,3 +124,25 @@ Copyright (C) 2026 fsaritome.
 
 Want to use this in a closed-source product? Open an issue to ask about a
 separate commercial license.
+
+## Disclaimer
+
+Friendly, but important:
+
+- **AI-assisted.** Much of this project, including the code, docs and figures,
+  was produced with an AI assistant (Claude) and then reviewed and tested by
+  me. Tests and preview checks pass, but AI-written code can contain mistakes
+  that nobody has noticed yet.
+- **Experimental.** It rewrites G-code that moves a hot nozzle around your
+  printer. A bug could mean a failed print, wasted filament, a nozzle crash
+  or blob, or worse. Always open the output in your slicer's preview first,
+  and watch the first layers of the print.
+- **Your risk.** You use this software and the example files entirely at your
+  own risk. It comes **without any warranty**, and the author is **not
+  liable** for any damage to printers, parts, property or anything else, or
+  for any other loss, however it is caused. This adds to the warranty
+  disclaimer and limitation of liability in sections 15–16 of the
+  [AGPL-3.0](LICENSE).
+
+Found a problem? Open an issue, ideally with the G-code and a photo. Every
+report makes it safer for the next person.
