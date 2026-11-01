@@ -244,7 +244,6 @@ def plan_block(moves: list[Move], width: float, s: Settings) -> Plan | None:
         return None
 
     # original free spans: straight extrusion runs (merge collinear consecutive moves)
-    old_spans = merged_run_lengths(ext)
 
     reach = math.hypot(*np.ptp(np.array(region.bounds).reshape(2, 2), axis=0)) + 1
     n_ang = max(2, int(round(180 / s.angles_deg)))
@@ -291,6 +290,7 @@ def plan_block(moves: list[Move], width: float, s: Settings) -> Plan | None:
 
     boundary = region.boundary
     hug = boundary.buffer(width * 0.45)
+    old_spans = free_spans(merged_runs(ext), hug)
     segments = []  # (angle, LineString)
     for ang, zp in zones:
         segments += [(ang, l) for l in fill_zone(zp, ang, spacing, hug, s.anchor, 0.0)]
@@ -298,7 +298,7 @@ def plan_block(moves: list[Move], width: float, s: Settings) -> Plan | None:
     if not segments:
         return None
     paths = order_paths(segments, spacing, region)
-    new_spans = [l.length for _, l in segments]
+    new_spans = free_spans([l for _, l in segments], hug)
     return Plan(region, zones, paths, old_spans, new_spans, width, spacing, epm, f_print, z)
 
 
@@ -390,22 +390,29 @@ def label_cells(cells: dict, region, minx, miny, g, s: Settings) -> dict:
     return label
 
 
-def merged_run_lengths(ext: list[Move]) -> list[float]:
-    runs, cur, last = [], 0.0, None
+def merged_runs(ext: list[Move]) -> list[LineString]:
+    """Straight extrusion runs (consecutive collinear moves merged)."""
+    runs, cur, last, cont_end = [], None, None, None
     for m in ext:
         d = (m.x1 - m.x0, m.y1 - m.y0)
         L = math.hypot(*d)
-        if last is not None and abs(last[0] * d[1] - last[1] * d[0]) < 0.02 * L * math.hypot(*last) \
+        if cur is not None and abs(last[0] * d[1] - last[1] * d[0]) < 0.02 * L * math.hypot(*last) \
                 and (last[0] * d[0] + last[1] * d[1]) > 0 and cont_end == (m.x0, m.y0):
-            cur += L
+            cur[1] = (m.x1, m.y1)
         else:
-            if cur:
-                runs.append(cur)
-            cur = L
+            if cur is not None:
+                runs.append(LineString(cur))
+            cur = [(m.x0, m.y0), (m.x1, m.y1)]
         last, cont_end = d, (m.x1, m.y1)
-    if cur:
-        runs.append(cur)
+    if cur is not None:
+        runs.append(LineString(cur))
     return runs
+
+
+def free_spans(lines, hug) -> list[float]:
+    """Lengths of lines that actually cross the bridge (not ones tracing an anchored edge)."""
+    out = [l.length for l in lines if not hug.contains(l)]
+    return out or [0.0]
 
 
 def fill_zone(poly, angle_deg, spacing, hug, anchor, phase, centered=False):

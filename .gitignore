@@ -3,3 +3,4 @@ __pycache__/
 .pytest_cache/
 *.gcode
 *.gcode.3mf
+!examples/**/*.gcode.3mf

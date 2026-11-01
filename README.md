@@ -27,6 +27,50 @@ How it works:
 A block is only rewritten if the longest span drops by at least 30 %
 (`--force` overrides this).
 
+## Example: Heltec V4 outdoor case
+
+Files: [`examples/heltec-v4-case/`](examples/heltec-v4-case/)
+
+![MainBody model](docs/images/model.png)
+
+`MainBody` is a 76 × 52 × 14 mm PLA frame. Both faces have a gasket groove
+between two 0.5 mm lips. It prints flat, so the **bottom groove ceiling is a
+~3 mm wide bridge 1 mm above the bed**, all the way around the ring:
+
+![Groove cross-section](docs/images/groove_section.png)
+
+Bambu Studio (2.0.2, `bridge_angle = 90`) bridges the whole ring in one
+direction. On the two long sides the lines therefore run **along** the groove,
+33 mm unsupported. With auto angle (0) it still picks one angle for the whole
+ring, so two sides are always wrong.
+
+![Groove layer before and after](docs/images/groove_before_after.png)
+
+Close-up: on the long side the lines now cross the 2 mm groove; around the
+screw bosses the direction follows the curve.
+
+![Groove detail](docs/images/groove_detail.png)
+
+The small bridges at Z 12.04 keep one direction per island (no fragmenting),
+but the direction is re-chosen for the shortest span:
+
+![Small islands before and after](docs/images/islands_before_after.png)
+
+| Layer | Bridge area | Longest line, Bambu | Longest line, bridgefix |
+|---|---|---|---|
+| Z 1.16 | groove ring | 33.4 mm | 4.7 mm |
+| Z 12.04 | 7 small islands | 3.5 – 19.7 mm | 1.3 – 5.3 mm (2 left unchanged) |
+
+Reproduce:
+```
+python bridgefix/bridgefix.py examples/heltec-v4-case/HeltecV4CaseOutdoorV2.gcode.3mf \
+    -o examples/heltec-v4-case/HeltecV4CaseOutdoorV2.bridgefix.gcode.3mf
+python tools/make_figures.py      # regenerates docs/images (needs trimesh, lxml)
+```
+
+Status: the rewritten file opens in Bambu Studio and the preview shows the
+new paths. **A test print is still pending.**
+
 ### Install
 ```
 pip install -r requirements.txt
