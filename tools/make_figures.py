@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (C) 2026 fsaritome
+# Part of overhangar: https://github.com/fsaritome/overhangar-gcode-postproxessor
+# Additional terms (AGPL-3.0 section 7(b)): see NOTICE; author attribution must be preserved.
 """Regenerate the README figures from examples/heltec-v4-case.
 
     pip install -r requirements.txt trimesh lxml

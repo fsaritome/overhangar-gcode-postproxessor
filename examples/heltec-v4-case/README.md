@@ -9,3 +9,5 @@
 The interesting layer is **Z 1.16 (layer 8)**, the ceiling of the bottom gasket
 groove. To check it without printing the whole part, start the print and cancel
 it after layer 9, then look at the groove ceiling.
+
+License: CC BY 4.0, (C) 2026 fsaritome. See [LICENSE](LICENSE).

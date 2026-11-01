@@ -1,3 +1,7 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (C) 2026 fsaritome
+# Part of overhangar: https://github.com/fsaritome/overhangar-gcode-postproxessor
+# Additional terms (AGPL-3.0 section 7(b)): see NOTICE; author attribution must be preserved.
 """Synthetic test: a rectangular ring bridge printed with all lines along Y
 (like bridge_angle=90 on a gasket-groove ceiling). The left/right sides then
 have long lengthwise lines; bridgefix must turn them across the groove."""

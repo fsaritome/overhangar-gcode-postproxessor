@@ -1,0 +1,31 @@
+overhangar
+Copyright (C) 2026 fsaritome
+https://github.com/fsaritome/overhangar-gcode-postproxessor
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, version 3 (see LICENSE).
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+details.
+
+ADDITIONAL TERMS (section 7(b) of the GNU AGPL-3.0)
+
+Anyone who conveys this program or a modified version of it, or makes it
+available to users over a network, must preserve the following author
+attribution:
+
+    "Based on overhangar by fsaritome
+     (https://github.com/fsaritome/overhangar-gcode-postproxessor)"
+
+The attribution must be kept in:
+  a) the source code (this NOTICE file and the copyright headers), and
+  b) the documentation (for example the README), and
+  c) any "about", "credits" or help text that the program or the product
+     incorporating it already shows to users. This term does not require
+     adding a new screen or notice where none exists.
+
+Example files in examples/ are licensed separately; see the LICENSE file in
+each example folder.

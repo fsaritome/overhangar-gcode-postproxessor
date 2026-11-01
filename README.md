@@ -102,3 +102,19 @@ in degrees), `--anchor` (extra extension of line ends into anchors, in mm),
 - Rewritten bridges are emitted as G1 moves (no arcs).
 - Line ends run onto the anchor, so a bridge layer uses about 5–10 % more filament.
 - The print-time estimate (M73) is not recalculated.
+
+## License
+
+Copyright (C) 2026 fsaritome.
+
+- **Code** (`bridgefix/`, `tools/`, `tests/`): [GNU AGPL-3.0](LICENSE). It
+  includes an additional term under section 7(b): keep the author attribution
+  *"Based on overhangar by fsaritome"* with a link to this repo (see [NOTICE](NOTICE)).
+  Commercial use is allowed. If you distribute a modified version, or run one
+  as a network service, you must publish its source under the AGPL.
+- **Example model and G-code** (`examples/heltec-v4-case/`):
+  [CC BY 4.0](examples/heltec-v4-case/LICENSE). Free to use, including
+  commercially, as long as you give credit.
+
+Want to use this in a closed-source product? Open an issue to ask about a
+separate commercial license.

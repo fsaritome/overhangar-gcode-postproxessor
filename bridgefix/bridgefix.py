@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: AGPL-3.0-only
+# Copyright (C) 2026 fsaritome
+# Part of overhangar: https://github.com/fsaritome/overhangar-gcode-postproxessor
+# Additional terms (AGPL-3.0 section 7(b)): see NOTICE; author attribution must be preserved.
 """bridgefix: re-plan bridge infill so every bridge line crosses the SHORTEST span.
 
 Bambu Studio / OrcaSlicer choose one bridge direction per bridge island (or a
@@ -36,6 +40,8 @@ import shapely
 from shapely import affinity
 from shapely.geometry import LineString, MultiLineString, Point, Polygon, box
 from shapely.ops import unary_union
+
+CREDIT = "overhangar by fsaritome - https://github.com/fsaritome/overhangar-gcode-postproxessor"
 
 FEATURE_RE = re.compile(r"^;\s*(?:FEATURE|TYPE):\s*(.+?)\s*$")
 LAYER_RE = re.compile(r"^;\s*(CHANGE_LAYER|LAYER_CHANGE)\b")
@@ -515,7 +521,7 @@ def fmt(v):
 def emit_block(header: list[str], keep: list[str], plan: Plan, st_in: MachineState,
                st_out: MachineState, s: Settings) -> list[str]:
     o = list(header)
-    o.append(f"; bridgefix: {len(plan.zones)} zone(s) "
+    o.append(f"; bridgefix ({CREDIT}): {len(plan.zones)} zone(s) "
              f"[{', '.join(f'{a:.0f}deg' for a, _ in plan.zones)}], "
              f"max span {max(plan.old_spans):.1f} -> {max(plan.new_spans):.1f} mm\n")
     o += keep
@@ -719,7 +725,8 @@ def process_file(src: str, dst: str, s: Settings, preview_path: str | None = Non
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter,
+                                 epilog=CREDIT + " | License: AGPL-3.0 (see LICENSE, NOTICE)")
     ap.add_argument("input", help=".gcode or .gcode.3mf")
     ap.add_argument("-o", "--output", help="output path (default: overwrite input = post-processing-script mode)")
     ap.add_argument("--preview", help="write a before/after PNG to this path")

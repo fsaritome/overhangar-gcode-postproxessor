@@ -1,0 +1,13 @@
+Heltec V4 outdoor case: MainBody model and sliced G-code
+Copyright (C) 2026 fsaritome
+
+The files in this folder (MainBody.3mf, HeltecV4CaseOutdoorV2.gcode.3mf,
+HeltecV4CaseOutdoorV2.bridgefix.gcode.3mf) are licensed under the
+Creative Commons Attribution 4.0 International License (CC BY 4.0).
+
+You may share and adapt them for any purpose, including commercially, as long
+as you give appropriate credit ("fsaritome", with a link to
+https://github.com/fsaritome/overhangar-gcode-postproxessor), provide a link to
+the license, and indicate if changes were made.
+
+Full license text: https://creativecommons.org/licenses/by/4.0/legalcode
